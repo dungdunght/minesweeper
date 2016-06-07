@@ -20,14 +20,16 @@ import mine.events.ChangeCellListener;
 public abstract class Divercant {
     
     protected ArrayList<Mine> _listMine;
-    protected GameField myfield;
+    protected GameModel myModel;
+    //protected GameField myfield;
 
     /**
      * конструктор создать диверсанту с полей _myfield
-     * @param _myfield текущая поля
+     * @param _model текущая модел
      */
-    public Divercant(GameField _myfield){
-        myfield=_myfield;
+    public Divercant(GameModel _model){
+        //myfield=_myfield;
+        myModel=_model;
         _listMine=new ArrayList<>();
     }
     /**
@@ -35,25 +37,30 @@ public abstract class Divercant {
      * @param mines количество мины
      */
     public void initiateMines(int mines){
-        int size=myfield.getNumberCell();
-        boolean[] checkCell= new boolean [size];
+        //int size=myModel.getNumberCell();
         
-        for (int i=0;i<size;i++){
-            checkCell[i]=false;
+        int width=myModel.width();
+        int height=myModel.height();
+        boolean[][] checkCell= new boolean [width][height];
+        
+        for (int i=1;i<=width;i++)
+            for(int j=1;j<=height;j++){
+            checkCell[i][j]=false;
         }
         
-        int randomMine;
+        int randomMineX,randomMineY;
         Random rand = new Random(); 
         for (int i=0;i<mines;i++){
+            do{
+                randomMineX=rand.nextInt(width)+1;
+                randomMineY=rand.nextInt(height)+1;
+            }
+            while(checkCell[randomMineX][randomMineY]);
             
-            do
-                randomMine=rand.nextInt(size); 
-            while(checkCell[randomMine]);
-            
-            Cell cell=myfield.getCell(randomMine);
+            Cell cell=myModel.getCell(randomMineX,randomMineY);
             Mine mineOfCell=cell.getMine();
             mineOfCell.setMine();
-            checkCell[randomMine]=true;
+            checkCell[randomMineX][randomMineY]=true;
             
             _listMine.add(cell.getMine());
                  

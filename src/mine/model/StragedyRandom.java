@@ -20,14 +20,16 @@ public class StragedyRandom extends Divercant{
      * Процесс диверсанта, мины случайно перемещают от текущего места на другого 
      */
     
-    public StragedyRandom(GameField myfield){
-        super(myfield);
+    public StragedyRandom(GameModel myModel){
+        super(myModel);
     }   
      
     @Override
     public void changeMinePosition(){
         
-        int numberCell=myfield.getNumberCell();
+        //int numberCell=myModel.getNumberCell();
+        int width=myModel.width();
+        int height=myModel.height();
         int numberMine=_listMine.size();
         Random rand = new Random(); 
         Mine mineChange=_listMine.get(rand.nextInt(numberMine));
@@ -41,7 +43,7 @@ public class StragedyRandom extends Divercant{
         
         Cell cellChange;
         do 
-            cellChange=myfield.getCell(rand.nextInt(numberCell));
+             cellChange=myModel.getCell(rand.nextInt(width)+1,rand.nextInt(height)+1);
         while (cellChange.getMine().isMined());
         
          System.out.println("noi chuyen: "+Integer.toString(cellChange.position().y)+" "+Integer.toString(cellChange.position().x));

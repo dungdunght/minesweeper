@@ -114,9 +114,9 @@ public class GamePanel extends JFrame{
      private void createField(){
         
         fieldPanel.setDoubleBuffered(true);
-        fieldPanel.setLayout(new GridLayout(_model.field().height(), _model.field().width()));
+        fieldPanel.setLayout(new GridLayout(_model.height(), _model.width()));
         
-        Dimension fieldDimension = new Dimension(CELL_SIZE* _model.field().width(), CELL_SIZE*_model.field().height());
+        Dimension fieldDimension = new Dimension(CELL_SIZE* _model.width(), CELL_SIZE*_model.height());
         
         fieldPanel.setPreferredSize(fieldDimension);
         fieldPanel.setMinimumSize(fieldDimension);
@@ -129,9 +129,9 @@ public class GamePanel extends JFrame{
         
         fieldPanel.removeAll();
 
-        for (int row = 1; row <= _model.field().height(); row++) 
+        for (int row = 1; row <= _model.height(); row++) 
         {
-            for (int col = 1; col <= _model.field().width(); col++) 
+            for (int col = 1; col <= _model.width(); col++) 
             {
                 JButton button;
 
@@ -161,13 +161,13 @@ public class GamePanel extends JFrame{
             }
          }
         
-        int fieldWidth = _model.field().width();
+        int fieldWidth = _model.width();
         return new Point(index%fieldWidth + 1, index/fieldWidth + 1);
     }
         
    private JButton getButton(Point pos) {
 
-       int index = _model.field().width()*(pos.y-1) + (pos.x-1);
+       int index = _model.width()*(pos.y-1) + (pos.x-1);
        
         for(Component widget: fieldPanel.getComponents())
         {
@@ -279,9 +279,8 @@ public class GamePanel extends JFrame{
         int _mines=(int) mineBox.getValue();
         
         _model=new GameModel(_width,_height,_mines);
-        _model.generateField();
         _model.divercant().addPlayerActionListener(new LoseGameObserver());
-        _model.field().addListnerOpenCellNotMineList(new changeCellObserver());
+        _model.addListnerOpenCellNotMineList(new changeCellObserver());
         
         _model.addFlagActionListner(new FlagActionObserver());
         _model.divercant().addDivercantChangeCellListner(new changeCellObserver());
@@ -300,7 +299,7 @@ public class GamePanel extends JFrame{
            
             JButton button = (JButton) e.getSource();
             Point p = buttonPosition(button);
-            if (!_model.field().getCell(p).getFlag().checkFlag()&&!_model.checkLoseGame()){
+            if (!_model.getCell(p.x,p.y).getFlag().checkFlag()&&!_model.checkLoseGame()){
                 
                 button.setEnabled(false);
                 _model.MineClearingAndDivercantWork(p);

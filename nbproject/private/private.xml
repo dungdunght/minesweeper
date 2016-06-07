@@ -8,12 +8,13 @@
             <file>file:/Users/NguyenDinhDung/Desktop/minesweeper/src/mine/events/ChangeCellEvent.java</file>
             <file>file:/Users/NguyenDinhDung/Desktop/minesweeper/src/mine/events/FlagActionListener.java</file>
             <file>file:/Users/NguyenDinhDung/Desktop/minesweeper/src/mine/model/GameModel.java</file>
-            <file>file:/Users/NguyenDinhDung/Desktop/minesweeper/src/mine/events/LoseGameEvent.java</file>
             <file>file:/Users/NguyenDinhDung/Desktop/minesweeper/src/mine/events/LoseGameListener.java</file>
-            <file>file:/Users/NguyenDinhDung/Desktop/minesweeper/src/mine/events/ChangeCellListener.java</file>
+            <file>file:/Users/NguyenDinhDung/Desktop/minesweeper/src/mine/events/LoseGameEvent.java</file>
             <file>file:/Users/NguyenDinhDung/Desktop/minesweeper/src/mine/views/GamePanel.java</file>
+            <file>file:/Users/NguyenDinhDung/Desktop/minesweeper/src/mine/events/ChangeCellListener.java</file>
             <file>file:/Users/NguyenDinhDung/Desktop/minesweeper/src/mine/model/AbstractObjects.java</file>
             <file>file:/Users/NguyenDinhDung/Desktop/minesweeper/src/mine/model/Flag.java</file>
+            <file>file:/Users/NguyenDinhDung/Desktop/minesweeper/src/mine/model/StragedyRandom.java</file>
             <file>file:/Users/NguyenDinhDung/Desktop/minesweeper/src/mine/model/GameField.java</file>
             <file>file:/Users/NguyenDinhDung/Desktop/minesweeper/src/mine/model/Divercant.java</file>
         </group>

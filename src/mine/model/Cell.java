@@ -19,8 +19,8 @@ public class Cell {
     private Mine _mine;
     private Flag _flag;
     private boolean _isOpened;
-    private GameField _myField;
-    
+    //private GameField _myField;
+    private GameModel _myModel;
     
    
     
@@ -30,12 +30,13 @@ public class Cell {
      * @param pos позиция ячейки
      * @param myField текущая поля 
      */
-    public Cell(Point pos,GameField myField){
+    public Cell(Point pos,GameModel myModel){
         _position=pos;
         _mine=new Mine(this);
         _flag=new Flag(this);
         _isOpened=false;
-        _myField=myField;
+        _myModel=myModel;
+        //_myField=myField;
         
     }
     
@@ -117,8 +118,8 @@ public class Cell {
                 newWidth=currentWidth+i;
                 newHeight=currentHeight+j;
                 
-                if (newWidth>0&&newWidth<=_myField.width()&&newHeight>0&&newHeight<=_myField.height()){
-                    Cell newCell=_myField.getCell(newWidth,newHeight);
+                if (newWidth>0&&newWidth<=_myModel.width()&&newHeight>0&&newHeight<=_myModel.height()){
+                    Cell newCell=_myModel.getCell(newWidth,newHeight);
                     listNeighborCell.add(newCell);
                 }
             }
@@ -131,9 +132,9 @@ public class Cell {
      */
     public void recursiveFreeCells(ArrayList<Cell> openedCell){
         this.openCell();
-        openedCell.add(this);
+            openedCell.add(this);
         int numberNeighborMine=this.getNumberNeighborMines();
-        _myField.fireCellNotMine(this.position(),numberNeighborMine);
+        _myModel.fireCellNotMine(this.position(),numberNeighborMine);
         if (numberNeighborMine==0)
         {
             
@@ -143,10 +144,10 @@ public class Cell {
                         if (!openedCell.contains(newCell)){
                             if (!newCell.getMine().isMined()&&!newCell.getFlag().checkFlag()){
                                 numberNeighborMine=newCell.getNumberNeighborMines();
-                                if (numberNeighborMine!=0){
+                                    if (numberNeighborMine!=0){
                                     newCell.openCell();
                                     openedCell.add(newCell);
-                                    _myField.fireCellNotMine(newCell.position(),numberNeighborMine);
+                                    _myModel.fireCellNotMine(newCell.position(),numberNeighborMine);
                                 }
 
                                 else
